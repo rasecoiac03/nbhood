@@ -53,6 +53,7 @@ func main() {
 	router.HandleFunc("/summary", FindSummaries).Methods("GET")
 	router.HandleFunc("/summary/{sort}", FindSummaries).Methods("GET")
 	router.HandleFunc("/nbh/{nbh}", FindNbh).Methods("GET")
+	router.HandleFunc("/nbh/{nbh}/{feature}", FindNbh).Methods("GET")
 	http.ListenAndServe(":9999", middle)
 }
 
@@ -74,12 +75,13 @@ func FindSummaries(w http.ResponseWriter, req *http.Request) {
 
 func FindNbh(w http.ResponseWriter, req *http.Request) {
 	nbh := mux.Vars(req)["nbh"]
-	features := queryNbh(nbh)
+	feature := mux.Vars(req)["feature"]
+	features := queryNbh(nbh, feature)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(features)
 }
 
-func queryNbh(nbh string) Features {
+func queryNbh(nbh string, feature string) Features {
 	sel := bson.M{
 		"feature":     1,
 		"featureName": 1,
@@ -87,6 +89,9 @@ func queryNbh(nbh string) Features {
 	}
 	match := bson.M{
 		"nbh": nbh,
+	}
+	if feature != "" {
+		match["feature"] = feature
 	}
 	var features Features
 	err := nbhsCollection.Find(match).Select(sel).All(&features)
