@@ -1,0 +1,17 @@
+hash: c039441e8f9c3b063fbd731a96abc57ba4f3506afd1ef17ae5a2214efe288e07
+updated: 2017-01-06T17:22:31.74364323-02:00
+imports:
+- name: github.com/carbocation/interpose
+  version: 723534742ba3bbda66268b735aaa41634468acc6
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/mux
+  version: 757bef944d0f21880861c2dd9c871ca543023cba
+- name: gopkg.in/mgo.v2
+  version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
+  subpackages:
+  - bson
+  - internal/json
+  - internal/sasl
+  - internal/scram
+testImports: []

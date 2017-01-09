@@ -1,0 +1,7 @@
+package: github.com/vivareal/nbhood
+import:
+- package: gopkg.in/mgo.v2
+  subpackages:
+  - bson
+- package: github.com/carbocation/interpose
+- package: github.com/gorilla/mux
